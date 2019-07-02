@@ -1,0 +1,176 @@
+{
+  "name": "cabbie",
+  "version": "0.0.1",
+  "description": "The great cabbie!",
+  "homepage": "",
+  "author": "Abourass",
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "mocha",
+    "prestart": "rm -f stdout.log && rm -f error.log && rm -f ./log/access.log",
+    "start": "cross-env NODE_ENV=development DEBUG=cabbie:server nodemon ./bin/server.js",
+    "nodemonProduction": "cross-env NODE_ENV=production nodemon ./bin/server.js",
+    "prod": "pm2-runtime start ecosystem.config.js --env production",
+    "clean": "rm -f stdout.log && rm -f error.log && rm -f ./log/access.log",
+    "externalLogging": "rm -f stdout.log && rm -f error.log && rm -f ./log/access.log && cross-env NODE_ENV=development DEBUG=cabbie:server nodemon ./bin/server.js > stdout.log 2> error.log"
+  },
+  "repository": "https://github.com/Abourass/cabbie.git",
+  "license": "MIT",
+  "main": "bin/server.js",
+  "dependencies": {
+    "anandamide-pancake": "^1.0.0",
+    "body-parser": "1.19.0",
+    "chalk": "^2.4.2",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.0.0",
+    "cookie-parser": "^1.4.4",
+    "cross-env": "^5.2.0",
+    "csurf": "^1.10.0",
+    "dayjs": "^1.8.14",
+    "debug": "^4.1.1",
+    "dotenv": "8.0.0",
+    "express": "4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.16.2",
+    "helmet": "3.18.0",
+    "http-errors": "^1.7.2",
+    "ip": "^1.1.5",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.6.2",
+    "morgan": "^1.9.1",
+    "pm2": "3.5.1",
+    "rotating-file-stream": "1.4.1"
+  },
+  "devDependencies": {
+    "@getify/eslint-plugin-proper-ternary": "^3.0.1",
+    "codacy-coverage": "^3.4.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-security": "^1.4.0",
+    "nodemon": "1.19.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1"
+  },
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "node",
+      "security",
+      "@getify/proper-ternary"
+    ],
+    "extends": [
+      "airbnb-base",
+      "plugin:node/recommended",
+      "plugin:security/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:@getify/proper-ternary/getify-says"
+    ],
+    "env": {
+      "mongo": true,
+      "es6": true,
+      "node": true
+    },
+    "rules": {
+      "arrow-parens": [
+        "error",
+        "as-needed",
+        {
+          "requireForBlockBody": true
+        }
+      ],
+      "no-unused-vars": "off",
+      "one-var": [
+        "error",
+        {
+          "var": "consecutive",
+          "let": "consecutive",
+          "const": "never"
+        }
+      ],
+      "one-var-declaration-per-line": "off",
+      "consistent-return": "off",
+      "func-names": "off",
+      "max-len": "off",
+      "no-unused-expressions": "off",
+      "no-console": "off",
+      "no-shadow": [
+        "error",
+        {
+          "hoist": "never",
+          "allow": [
+            "done",
+            "resolve",
+            "err",
+            "error",
+            "cb",
+            "User",
+            "user",
+            "issue"
+          ]
+        }
+      ],
+      "no-param-reassign": [
+        "error",
+        {
+          "props": true,
+          "ignorePropertyModificationsFor": [
+            "realtor",
+            "tempRealtor",
+            "counters",
+            "user",
+            "selectedUser",
+            "client",
+            "employee",
+            "issue",
+            "res",
+            "userReturned"
+          ]
+        }
+      ],
+      "no-useless-escape": "off",
+      "no-lonely-if": "error",
+      "no-new-object": "error",
+      "object-curly-newline": [
+        "error",
+        {
+          "multiline": true,
+          "consistent": true
+        }
+      ],
+      "no-underscore-dangle": "off",
+      "object-curly-spacing": [
+        "error",
+        "never"
+      ],
+      "object-shorthand": [
+        "error",
+        "consistent"
+      ],
+      "prefer-destructuring": "off",
+      "space-before-blocks": "off",
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ],
+      "prefer-rest-params": "off",
+      "import/newline-after-import": "off"
+    }
+  },
+  "nodemonConfig": {
+    "events": {
+      "start": "cls || clear"
+    },
+    "ignore": [
+      "log/"
+    ]
+  }
+}
