@@ -1,13 +1,13 @@
 <section class="hero is-small is-pumpkin is-bold">
-  <div class="hero-body" style="padding-bottom: 0.5rem; padding-top: 0.1rem;">
+  <div class="hero-body" style="padding-bottom: 0.5rem; padding-top: 0; margin-top: -2rem">
     <div class="container media">
       <figure class="media-left">
-        <p class="image" style="width: 120px; height: 120px;">
+        <p class="image" style="width: 120px; height: 120px; padding-top: 2rem;">
           <img class="icon icon-cabbie" src="../img/taxi-compressed.svg" alt="Cabbie Icon">
         </p>
       </figure>
       <div class="media-content" style="margin-top: auto; margin-bottom: auto; margin-left: -1rem;">
-        <h1 class="title" style="font-size: 3.5rem;">
+        <h1 class="title" style="font-size: 4rem;">
           Cabbie
         </h1>
       </div>
@@ -16,8 +16,83 @@
 </section>
 <section class="section">
   <div class="container">
-    <div class="image container" style="width: max-content !important;">
-      <img data-src="../img/meme.jpg" class="lazy">
+
+      <div class="columns level">
+        <div class="column level-item has-text-centered">
+          <div class="field">
+            <label for="word" class="label">Word</label>
+            <div class="control">
+              <input class="input" type="text" name="word" id="word">
+            </div>
+          </div>
+        </div>
+        <div class="column level-item has-text-centered">
+          <div class="field">
+            <label for="definition" class="label">Definition</label>
+            <div class="control">
+              <input class="input" type="text" name="definition" id="definition">
+            </div>
+          </div>
+        </div>
+        <div class="column level-item has-text-centered">
+          <div class="field">
+            <label for="pronunciation" class="label">Pronunciation</label>
+            <div class="control">
+              <input class="input" type="text" name="pronunciation" id="pronunciation">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="field is-grouped is-pulled-right">
+      <div class="control">
+        <button class="button is-link">Submit</button>
+      </div>
+      <div class="control">
+        <button class="button is-text">Clear</button>
+      </div>
     </div>
+
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <nav class="panel" style="background: white">
+      <p class="panel-heading">
+        Dictionary
+      </p>
+
+      <a class="panel-block" style="display: block">
+        <div class="level">
+          <div class="level-item has-text-centered">
+            <span class="has-text-centered">Word</span>
+          </div>
+          <div class="level-item has-text-centered">
+            <span class="has-text-centered">Definition</span>
+          </div>
+          <div class="level-item has-text-centered">
+            <span class="has-text-centered">Pronunciation</span>
+          </div>
+        </div>
+      </a>
+      <a class="panel-block" style="display: block">
+        <div class="level">
+          <div class="level-item has-text-centered">
+            <span class="has-text-centered">Hallo</span>
+          </div>
+          <div class="level-item has-text-centered">
+            <span class="has-text-centered">Hello, A Greeting</span>
+          </div>
+          <div class="level-item has-text-centered">
+            <span class="has-text-centered">ha-low</span>
+          </div>
+        </div>
+      </a>
+      <div class="panel-block">
+        <button class="button is-link is-outlined is-fullwidth">
+          Export
+        </button>
+      </div>
+    </nav>
   </div>
 </section>

@@ -81,8 +81,8 @@
 }
 
 .media-content {
-  height: 100px;
-  line-height: 100px;
+  height: 90px;
+  line-height: 140px;
 }
 
 .title {
@@ -93,4 +93,26 @@
 
 html {
   background: antiquewhite !important;
+}
+
+.button.is-link.is-outlined {
+  background-color: transparent;
+  border-color: #fd8469;
+  color: #fd8469;
+}
+
+.button.is-link.is-outlined.is-focused, .button.is-link.is-outlined.is-hovered, .button.is-link.is-outlined:focus, .button.is-link.is-outlined:hover {
+  background-color: #fd8469;
+  border-color: #c47062;
+  color: #fff;
+}
+
+.button.is-link.is-focused:not(:active), .button.is-link:focus:not(:active) {
+  box-shadow: 0 0 0 .125em rgb(224, 122, 101);
+}
+
+a {
+  color: #fd8469;
+  cursor: pointer;
+  text-decoration: none;
 }

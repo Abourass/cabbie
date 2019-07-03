@@ -7,7 +7,6 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "mocha",
-    "prestart": "rm -f stdout.log && rm -f error.log && rm -f ./log/access.log",
     "start": "cross-env NODE_ENV=development DEBUG=cabbie:server nodemon ./bin/server.js",
     "nodemonProduction": "cross-env NODE_ENV=production nodemon ./bin/server.js",
     "prod": "pm2-runtime start ecosystem.config.js --env production",
