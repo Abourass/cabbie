@@ -251,4 +251,19 @@ a {
   opacity: 0;
 }
 
+.modal.is-active {
+  background: #dddddd;
+  color: #dddddd;
+}
 
+#dictionaryName::placeholder {
+  color: black;
+}
+
+.panel-tabs {
+  background: #fff;
+}
+
+.panel-block {
+  background: #fff;
+}
