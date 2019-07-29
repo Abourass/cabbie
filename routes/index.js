@@ -151,27 +151,27 @@ exit 0`;
 const setupGenerator = function(name){
   try {
     return `#!/usr/bin/env bash
-cp vocab-${name}.sh $HOME/vocab-${name}.sh
-cp .vocab-script.sh $HOME/.vocab-script.sh
+cp vocab-${name}.sh "$HOME/vocab-${name}.sh"
+cp .vocab-script.sh "$HOME/.vocab-script.sh"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 \tOSBASHRC=bashrc
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 \tOSBASHRC=bash_profile
 fi
-if ! grep -Fxq '$HOME/.vocab-${name}.sh' ~/.$OSBASHRC; then
-\techo $'\\n$HOME/.vocab-${name}.sh' >> ~/.$OSBASHRC
+if ! grep -Fxq "$HOME/.vocab-${name}.sh" ~/.$OSBASHRC; then
+\techo $"\\n$HOME/.vocab-${name}.sh" >> ~/.$OSBASHRC
 fi
 
 OSBASHRC="zshrc"
 if [[ -f ~/.$OSBASHRC ]]; then
-\tif ! grep -Fxq '$HOME/.vocab-${name}' ~/.$OSBASHRC; then
-\t\techo $'\\n$HOME/.vocab-${name}' >> ~/.$OSBASHRC
+\tif ! grep -Fxq "$HOME/.vocab-${name}" ~/.$OSBASHRC; then
+\t\techo $"\\n$HOME/.vocab-${name}" >> ~/.$OSBASHRC
 \tfi
 fi
 
-echo $'chmod u+x $HOME/.vocab-${name}.sh'
-echo $'chmod u+x $HOME/.vocab-script.sh'`;
+echo $"chmod u+x $HOME/.vocab-${name}.sh"
+echo $"chmod u+x $HOME/.vocab-script.sh"`;
   } catch (err) {
     console.error(err);
   }
