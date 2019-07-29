@@ -144,8 +144,35 @@ export wordArray
 export meaningArray
 export pronunciationArray
 # chmod +x ~/.vocab-script
-. ~/.vocab-script-de
+. ~/.vocab-script.sh
 exit 0`;
+};
+
+const setupGenerator = function(name){
+  try {
+    return `#!/usr/bin/env bash
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+\tOSBASHRC=bashrc
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+\tOSBASHRC=bash_profile
+fi
+if ! grep -Fxq '$HOME/.vocab-${name}.sh' ~/.$OSBASHRC; then
+\techo $'\\n~/.vocab-${name}.sh' >> ~/.$OSBASHRC
+fi
+
+OSBASHRC="zshrc"
+if [[ -f ~/.$OSBASHRC ]]; then
+\tif ! grep -Fxq '$HOME/.vocab-${name}' ~/.$OSBASHRC; then
+\t\techo $'\\n~/.vocab-${name}' >> ~/.$OSBASHRC
+\tfi
+fi
+
+echo $'chmod u+x ~/.vocab-${name}.sh'
+echo $'chmod u+x ~/.vocab-script.sh'`;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const urlGenerator = function(name) {
@@ -172,6 +199,16 @@ router.get('/export/:id/:name', (req, res) => {
             if (err) throw err;
             console.debug('Exported!');
           });
+
+        fs.writeFile(path.join(global.appRoot, 'output', `${req.params.name}-setup.sh`), setupGenerator(req.params.name),
+          (err) => {
+            if (err) throw err;
+            console.debug('Exported!');
+          });
+        fs.copyFile(path.join(global.appRoot, 'data', '.vocab-script.sh'), path.join(global.appRoot, 'output', '.vocab-script.sh'), (err) => {
+          if (err) throw err;
+          console.log('Copied successfully');
+        });
         res.redirect(backURL);
       });
     }
