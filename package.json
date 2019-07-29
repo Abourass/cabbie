@@ -18,6 +18,7 @@
   "main": "bin/server.js",
   "dependencies": {
     "anandamide-pancake": "^1.0.0",
+    "archiver": "^3.0.3",
     "body-parser": "1.19.0",
     "chalk": "^2.4.2",
     "compression": "^1.7.4",

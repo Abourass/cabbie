@@ -7,6 +7,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const archiver = require('archiver');
 const csrfProtection = csrf({cookie: true});
 const parseForm = bodyParser.urlencoded({extended: false});
 const Dictionary = mongoose.model('dictionary');
@@ -210,6 +211,44 @@ router.get('/export/:id/:name', (req, res) => {
           if (err) throw err;
           console.debug('Copied successfully');
         });
+        const zip = fs.createWriteStream(path.join(global.appRoot, 'output', `${req.params.name}-dictionary.zip`));
+        const archive = archiver('zip', {zlib: {level: 9}});
+
+        // listen for all archive data to be written
+        // 'close' event is fired only when a file descriptor is involved
+        zip.on('close', () => {
+          console.log(`${archive.pointer()} total bytes`);
+          console.log('archiver has been finalized and the output file descriptor has closed.');
+        });
+
+        // This event is fired when the data source is drained no matter what was the data source.
+        // It is not part of this library but rather from the NodeJS Stream API.
+        // @see: https://nodejs.org/api/stream.html#stream_event_end
+        zip.on('end', () => {
+          console.log('Data has been drained');
+        });
+
+        // good practice to catch warnings (ie stat failures and other non-blocking errors)
+        archive.on('warning', (err) => {
+          if (err.code === 'ENOENT') {
+            console.error('ENOENT');
+          } else {
+            throw err;
+          }
+        });
+
+        // good practice to catch this error explicitly
+        archive.on('error', (err) => {
+          throw err;
+        });
+
+        // pipe archive data to the file
+        archive.pipe(zip);
+
+        // append files to the stream
+        archive.directory(path.join(global.appRoot, 'output'), false);
+        archive.finalize();
+
         res.redirect(backURL);
       });
     }

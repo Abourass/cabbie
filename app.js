@@ -22,6 +22,7 @@ const debug = require('debug')('cabbie:server');
 const logger = require('morgan');
 const rfs = require('rotating-file-stream');
 const chalk = require('chalk');
+const archiver = require('archiver');
 const models = path.join(__dirname, 'models');
 
 require('dotenv').config(); // =====================================> dotEnv provides support for our .env file <=============
