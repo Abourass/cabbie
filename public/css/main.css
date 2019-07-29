@@ -116,3 +116,139 @@ a {
   cursor: pointer;
   text-decoration: none;
 }
+
+.has-flex {
+  display: flex;
+}
+
+.f-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.f-reversed-row {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.f-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.f-reversed-column {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.reverse-wrap {
+  flex-wrap: wrap-reverse;
+}
+
+.justify-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.justify-space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.vert-stretch {
+  display: flex;
+  align-items: stretch;
+}
+
+.vert-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.vert-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.vert-center {
+  display: flex;
+  align-items: center;
+}
+
+.vert-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+.horiz-stretch {
+  display: flex;
+  align-content: stretch;
+}
+
+.horiz-start {
+  display: flex;
+  align-content: flex-start;
+}
+
+.horiz-end {
+  display: flex;
+  align-content: flex-end;
+}
+
+.horiz-center {
+  display: flex;
+  align-content: center;
+}
+
+.horiz-space-between {
+  display: flex;
+  align-content: space-between;
+}
+
+.horiz-space-around {
+  display: flex;
+  align-content: space-between;
+}
+
+.center-completely {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.show {
+  transition: opacity 400ms;
+}
+.hide {
+  opacity: 0;
+}
+
+

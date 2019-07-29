@@ -16,13 +16,13 @@ const MongoStore = require('connect-mongo')(session);
 const pancake = require('anandamide-pancake');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
-const dayjs = require('dayjs');
 const ip = require('ip');
 const fs = require('fs');
 const debug = require('debug')('cabbie:server');
 const logger = require('morgan');
 const rfs = require('rotating-file-stream');
 const chalk = require('chalk');
+const models = path.join(__dirname, 'models');
 
 require('dotenv').config(); // =====================================> dotEnv provides support for our .env file <=============
 const app = express(); // ==========================================> Initialize Express <====================================
@@ -41,6 +41,10 @@ app.use(bodyParser.urlencoded({extended: false})); // ==============> Required f
 app.use(cookieParser()); // ========================================> Cookie Parser Middleware <==============================
 app.use(csrf({cookie: true})); // ==================================> Let CSRF Use Cookies <==================================
 
+// Load All Models
+// eslint-disable-next-line global-require,import/no-dynamic-require,security/detect-non-literal-require,no-bitwise
+fs.readdirSync('models').filter(file => ~file.search(/^[^.].*\.js$/)).forEach(file => require(path.join(models, file)));
+
 const indexRoute = require('./routes/index'); // ===================> Load Routes <===========================================
 
 mongoose.connect(process.env.mongoURI, {useNewUrlParser: true}) // ======> Connect to our Database <==========================
@@ -58,9 +62,9 @@ app.use(logger('dev', {// ==========================================> Log Errors
 app.use(bodyParser.json()); // =====================================> Body Parser Middleware <=================================
 app.use(methodOverride('_method')); // =============================> Method Override Middleware <=============================
 
-const {truncate} = require('./helpers/hbs');
+const {truncate, isEqual} = require('./helpers/hbs');
 app.engine('.handlebars', exphbs({
-  helpers: {truncate: truncate},
+  helpers: {truncate: truncate, isEqual: isEqual},
   defaultLayout: 'main',
   partialsDir: ['./views/partials/'],
   extname: '.handlebars',

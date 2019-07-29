@@ -10,4 +10,7 @@ module.exports = {
     }
     return a;
   },
+  isEqual: function(a, b) {
+    return a === b;
+  },
 };

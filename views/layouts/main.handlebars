@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlContainer">
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="The great cabbie!">
@@ -10,14 +10,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.5/css/bulma.min.css">
   <link rel="stylesheet" href="./css/main.css">
   <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css">
 </head>
 <body>
 {{{body}}}
   <script>
     (function (w, d) {
-      w.addEventListener('LazyLoad::Initialized', function (e) {
-        w.lazyLoadInstance = e.detail.instance;
-      }, false);
+      w.addEventListener('LazyLoad::Initialized', function (e) { w.lazyLoadInstance = e.detail.instance; }, false);
       let b = d.getElementsByTagName('body')[0];
       let s = d.createElement("script"); s.async = false;
       let v = !("IntersectionObserver" in w) ? "8.16.0" : "10.19.0";
@@ -29,5 +28,6 @@
       b.appendChild(s);
     }(window, document));
   </script>
+<script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
 </body>
 </html>

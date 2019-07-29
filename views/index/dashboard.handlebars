@@ -16,34 +16,32 @@
 </section>
 <section class="section">
   <div class="container">
-
-      <div class="columns level">
-        <div class="column level-item has-text-centered">
-          <div class="field">
-            <label for="word" class="label">Word</label>
-            <div class="control">
-              <input class="input" type="text" name="word" id="word">
-            </div>
-          </div>
-        </div>
-        <div class="column level-item has-text-centered">
-          <div class="field">
-            <label for="definition" class="label">Definition</label>
-            <div class="control">
-              <input class="input" type="text" name="definition" id="definition">
-            </div>
-          </div>
-        </div>
-        <div class="column level-item has-text-centered">
-          <div class="field">
-            <label for="pronunciation" class="label">Pronunciation</label>
-            <div class="control">
-              <input class="input" type="text" name="pronunciation" id="pronunciation">
-            </div>
+    <div class="columns level">
+      <div class="column level-item has-text-centered">
+        <div class="field">
+          <label for="word" class="label">Word</label>
+          <div class="control">
+            <input class="input" type="text" name="word" id="word">
           </div>
         </div>
       </div>
-
+      <div class="column level-item has-text-centered">
+        <div class="field">
+          <label for="definition" class="label">Definition</label>
+          <div class="control">
+            <input class="input" type="text" name="definition" id="definition">
+          </div>
+        </div>
+      </div>
+      <div class="column level-item has-text-centered">
+        <div class="field">
+          <label for="pronunciation" class="label">Pronunciation</label>
+          <div class="control">
+            <input class="input" type="text" name="pronunciation" id="pronunciation">
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="field is-grouped is-pulled-right">
       <div class="control">
         <button class="button is-link">Submit</button>
@@ -52,42 +50,35 @@
         <button class="button is-text">Clear</button>
       </div>
     </div>
-
   </div>
 </section>
 <section class="section">
   <div class="container">
     <nav class="panel" style="background: white">
-      <p class="panel-heading">
-        Dictionary
-      </p>
-
-      <a class="panel-block" style="display: block">
-        <div class="level">
-          <div class="level-item has-text-centered">
-            <span class="has-text-centered">Word</span>
-          </div>
-          <div class="level-item has-text-centered">
-            <span class="has-text-centered">Definition</span>
-          </div>
-          <div class="level-item has-text-centered">
-            <span class="has-text-centered">Pronunciation</span>
-          </div>
+      <div class="panel-heading">
+        <span>Dictionary</span>
+        <div class="select is-small">
+          <select>
+            <option value="du">German (Dutch)</option>
+          </select>
         </div>
-      </a>
-      <a class="panel-block" style="display: block">
-        <div class="level">
-          <div class="level-item has-text-centered">
-            <span class="has-text-centered">Hallo</span>
+        <button class="button is-small modal-button" id="toggleModalBtn">Create New</button>
+      </div>
+      {{#each dictionaryEntry}}
+        <a class="panel-block" style="display: block">
+          <div class="f-row justify-space-around">
+            <div class="has-text-centered">
+              <span class="has-text-centered">{{word}}</span>
+            </div>
+            <div class="has-text-centered">
+              <span class="has-text-centered">{{definition}}</span>
+            </div>
+            <div class="has-text-centered">
+              <span class="has-text-centered">{{pronounciation}}</span>
+            </div>
           </div>
-          <div class="level-item has-text-centered">
-            <span class="has-text-centered">Hello, A Greeting</span>
-          </div>
-          <div class="level-item has-text-centered">
-            <span class="has-text-centered">ha-low</span>
-          </div>
-        </div>
-      </a>
+        </a>
+      {{/each}}
       <div class="panel-block">
         <button class="button is-link is-outlined is-fullwidth">
           Export
@@ -96,3 +87,10 @@
     </nav>
   </div>
 </section>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <!-- Any other Bulma elements you want -->
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
