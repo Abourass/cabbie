@@ -62,17 +62,28 @@
   <div class="container">
     <nav class="panel" style="background: white">
       <div class="panel-heading">
-        <span>Dictionary</span>
-        <div class="select is-small">
-          <select>
-            {{#if dictionary}}
-              <option value="{{dictionary.name}}">{{dictionary.name}}</option>
-            {{else}}
-              <option value="du">German (Dutch)</option>
-            {{/if}}
-          </select>
+        <div class="columns is-mobile">
+          <div class="column is-8-mobile is-4-tablet is-3-desktop">
+            <span>Dictionary</span>
+            <div class="select is-small">
+              <select>
+                {{#if dictionary}}
+                  <option value="{{dictionary.name}}">{{dictionary.name}}</option>
+                {{else}}
+                  <option value="du">German (Dutch)</option>
+                {{/if}}
+              </select>
+            </div>
+            <button class="button is-small modal-button" id="toggleModalBtn" data-target="chooseNameModal">Create New</button>
+          </div>
+          <div class="column is-3-mobile is-offset-7-tablet is-offset-9-desktop">
+            <a href="/export/{{dictionary._id}}/{{dictionary.name}}">
+              <button class="button is-link is-outlined is-small">
+                Export
+              </button>
+            </a>
+          </div>
         </div>
-        <button class="button is-small modal-button" id="toggleModalBtn" data-target="chooseNameModal">Create New</button>
       </div>
       {{#each entry}}
         <a class="panel-block" style="display: block">
@@ -89,13 +100,6 @@
           </div>
         </a>
       {{/each}}
-      <div class="panel-block">
-        <a href="/export/{{dictionary._id}}">
-          <button class="button is-link is-outlined is-fullwidth">
-            Export
-          </button>
-        </a>
-      </div>
     </nav>
   </div>
 </section>

@@ -97,6 +97,8 @@ app.use((req, res, next) => {
   res.send('404 - Route Not Found'); // ============================> catch 404 and forward to error handler <=================
 });
 
+global.appRoot = path.resolve(__dirname);
+
 app.use((err, req, res, next) => { // ==============================> Error Handler <==========================================
   res.locals.message = err.message; // =============================> set locals, only providing error in development <========
   res.locals.error = (req.app.get('env') === 'development') ? err : {};
