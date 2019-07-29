@@ -9,6 +9,7 @@ const csrfProtection = csrf({cookie: true});
 const parseForm = bodyParser.urlencoded({extended: false});
 const Dictionary = mongoose.model('dictionary');
 const Entries = mongoose.model('entries');
+const {Queue} = require('../data/queue');
 
 router.get('/', csrfProtection, (req, res) => {
   try {
@@ -99,6 +100,32 @@ router.post('/newEntry', csrfProtection, (req, res) => {
       });
       newEntry.save().catch(err => console.error(err));
       res.redirect(backURL);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.get('/export/:id', (req, res) => {
+  try {
+    const backURL = req.header('Referer') || '/';
+    const nameQueue = new Queue();
+    const definitionQueue = new Queue();
+    const pronunciationQueue = new Queue();
+    if (req.params.id === '') {
+      res.redirect(backURL);
+    } else {
+      Entries.find({dictionary: req.params.id}).then((allEntries) => {
+        allEntries.forEach((entry) => {
+          nameQueue.add(entry.name);
+          nameQueue.scry();
+          definitionQueue.add(entry.definition);
+          definitionQueue.scry();
+          pronunciationQueue.add(entry.pronunciation);
+          pronunciationQueue.scry();
+        });
+        res.redirect(backURL);
+      });
     }
   } catch (err) {
     console.error(err);

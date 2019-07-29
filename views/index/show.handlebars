@@ -84,15 +84,17 @@
               <span class="has-text-centered">{{definition}}</span>
             </div>
             <div class="has-text-centered">
-              <span class="has-text-centered">{{pronounciation}}</span>
+              <span class="has-text-centered">{{pronunciation}}</span>
             </div>
           </div>
         </a>
       {{/each}}
       <div class="panel-block">
-        <button class="button is-link is-outlined is-fullwidth">
-          Export
-        </button>
+        <a href="/export/{{dictionary._id}}">
+          <button class="button is-link is-outlined is-fullwidth">
+            Export
+          </button>
+        </a>
       </div>
     </nav>
   </div>
