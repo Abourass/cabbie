@@ -5,8 +5,6 @@
   "homepage": "",
   "author": "Abourass",
   "scripts": {
-    "pretest": "eslint .",
-    "test": "mocha",
     "start": "cross-env NODE_ENV=development DEBUG=cabbie:server nodemon ./bin/server.js",
     "nodemonProduction": "cross-env NODE_ENV=production nodemon ./bin/server.js",
     "prod": "pm2-runtime start ecosystem.config.js --env production",
