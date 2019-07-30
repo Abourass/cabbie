@@ -18,7 +18,3 @@ branches:
   only:
     - master
 
-jobs:
-  include:
-    - stage: mocha
-      script: $(npm bin)/mocha

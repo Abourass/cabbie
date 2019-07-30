@@ -43,7 +43,6 @@
   "devDependencies": {
     "@getify/eslint-plugin-proper-ternary": "^3.0.1",
     "codacy-coverage": "^3.4.0",
-    "chai": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-import-resolver-node": "^0.3.2",
@@ -51,8 +50,6 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-security": "^1.4.0",
     "nodemon": "1.19.1",
-    "mocha": "^6.1.4",
-    "nyc": "^14.1.1"
   },
   "engines": {
     "node": "10.16.0",
