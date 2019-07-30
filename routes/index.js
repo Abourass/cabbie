@@ -179,7 +179,7 @@ echo $"chmod u+x $HOME/.vocab-script.sh"`;
 };
 
 const urlGenerator = function(name) {
-  return path.join(global.appRoot, 'output', `vocab-${name}.sh`);
+  return path.join(global.appRoot, 'output', 'scripts', `vocab-${name}.sh`);
 };
 
 router.get('/export/:id/:name', (req, res) => {
@@ -188,7 +188,7 @@ router.get('/export/:id/:name', (req, res) => {
     const wordQueue = new Queue();
     const definitionQueue = new Queue();
     const pronunciationQueue = new Queue();
-    if (req.params.id === '') {
+    if (req.params.id === '' || req.params.name === '') {
       res.redirect(backURL);
     } else {
       Entries.find({dictionary: req.params.id}).sort({word: 1}).then((allEntries) => {
@@ -202,16 +202,16 @@ router.get('/export/:id/:name', (req, res) => {
             if (err) throw err;
             console.debug('Exported!');
           });
-        fs.writeFile(path.join(global.appRoot, 'output', `${req.params.name}-setup.sh`), setupGenerator(req.params.name),
+        fs.writeFile(path.join(global.appRoot, 'output', 'scripts', `${req.params.name}-setup.sh`), setupGenerator(req.params.name),
           (err) => {
             if (err) throw err;
             console.debug('Exported!');
           });
-        fs.copyFile(path.join(global.appRoot, 'data', '.vocab-script.sh'), path.join(global.appRoot, 'output', '.vocab-script.sh'), (err) => {
+        fs.copyFile(path.join(global.appRoot, 'data', '.vocab-script.sh'), path.join(global.appRoot, 'output', 'scripts', '.vocab-script.sh'), (err) => {
           if (err) throw err;
           console.debug('Copied successfully');
         });
-        const zip = fs.createWriteStream(path.join(global.appRoot, 'output', `${req.params.name}-dictionary.zip`));
+        const zip = fs.createWriteStream(path.join(global.appRoot, 'output', 'archives', `${req.params.name}-dictionary.zip`));
         const archive = archiver('zip', {zlib: {level: 9}});
 
         // listen for all archive data to be written
@@ -246,12 +246,19 @@ router.get('/export/:id/:name', (req, res) => {
         archive.pipe(zip);
 
         // append files to the stream
-        archive.directory(path.join(global.appRoot, 'output'), false);
+        archive.directory(path.join(global.appRoot, 'output', 'scripts'), false);
         archive.finalize();
-
-        res.redirect(backURL);
+        res.redirect(`/download/${req.params.name}`);
       });
     }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.get('/download/:name', (req, res) => {
+  try {
+    res.download(path.join(global.appRoot, 'output', 'archives', `${req.params.name}-dictionary.zip`), `${req.params.name}-dictionary.zip`);
   } catch (err) {
     console.error(err);
   }
