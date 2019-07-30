@@ -118,11 +118,11 @@ const queueFormatter = function(queue) {
   console.debug(queue.length() - 1);
   queue.forEach((item, i) => {
     if (i === 0){
-      correctedString = `'${item}' \n`;
+      correctedString = `"${item}" \n`;
     } else if (i === queue.length() - 1) {
-      correctedString += `'${item}'`;
+      correctedString += `"${item}"`;
     } else {
-      correctedString += `'${item}' \n`;
+      correctedString += `"${item}" \n`;
     }
   });
   return correctedString;
@@ -263,5 +263,130 @@ router.get('/download/:name', (req, res) => {
     console.error(err);
   }
 });
+
+const entryCreator = function(wordQueue, defineQueue, pronunQueue) {
+  try {
+    if (wordQueue.length() !== defineQueue.length() || defineQueue.length() !== pronunQueue.length()) {
+      console.error('You\'re input\'s don\'t match in length!');
+    } else {
+      Dictionary.findOne({name: 'German'}).then((foundDictionary) => {
+        while (wordQueue.isEmpty() !== true) {
+          const newEntry = new Entries({
+            word: wordQueue.remove(),
+            definition: defineQueue.remove(),
+            pronunciation: pronunQueue.remove(),
+            dictionary: foundDictionary._id,
+          });
+          newEntry.save().catch(err => console.error(err));
+        }
+      });
+      return 'Created all entries';
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+router.get('/bulk', (req, res) => {
+  try {
+    const wordArray = ['Hallo',
+      'Guten Tag',
+      'Danke',
+      'Dankeschön',
+      'Vielen Dank',
+      'Tausend Dank',
+      'Bitte',
+      'Gut',
+      'tschüss',
+      'Apfel',
+      'Mann',
+      'Frau',
+      'Junge',
+      'Mädchen',
+      'Ihr',
+      'Ein Mann',
+      'Eine Frau',
+      'Ein Junge',
+      'Ein Mädchen',
+      'Gern Geschehen',
+      'Gerne',
+      'Es tut mir Leid',
+      'Essen',
+      'Isst',
+      'Esse',
+      'Esst'];
+    const wordQueue = new Queue();
+    wordArray.forEach((word) => {
+      wordQueue.add(word);
+    });
+    const meaningArray = ['Hello, a greeting',
+      'Good Day',
+      'Thanks / Thank you',
+      'Thank you very much',
+      'Many Thanks',
+      'A Thousand Thanks',
+      'Please',
+      'Good / Fine',
+      'Bye',
+      'Apple',
+      'Man',
+      'Woman',
+      'Boy',
+      'Girl',
+      'You / Her',
+      'A man',
+      'A woman',
+      'A boy',
+      'A girl',
+      "You're Welcome",
+      "A less formal 'You're Welcome'",
+      "I'm sorry, or literally translated 'It does me Harm'",
+      'Are Eating',
+      'Are Eating / Eats',
+      'Am Eating / Eat / Eating',
+      'Are Eating / Eating / Eat'];
+    const definitionQueue = new Queue();
+    meaningArray.forEach((definition) => {
+      definitionQueue.add(definition);
+    });
+    const pronunciationArray = [
+      'ha-low',
+      'gu-ten tag',
+      'dahn-keh',
+      'dahn-keh-show-n',
+      'Feel-en Dahnk',
+      't-ow-zend Dahnk',
+      'bit-teh',
+      'goo-t',
+      'choosse',
+      'app-fel',
+      'mah-n',
+      'frow',
+      'you-n-geh',
+      'maid-ken',
+      'e-hr',
+      'eye-n Man',
+      'eye-neh frow',
+      'eye-n you-n-geh',
+      'eye-n maid-ken',
+      'Ghern gah-shane',
+      'Ghern',
+      'Es toot meir lied',
+      'es-sen',
+      'isst',
+      'es-seh',
+      'esst',
+    ];
+    const pronunciationQueue = new Queue();
+    pronunciationArray.forEach((pronunciation) => {
+      pronunciationQueue.add(pronunciation);
+    });
+    entryCreator(wordQueue, definitionQueue, pronunciationQueue);
+    res.redirect('/show/German');
+  } catch (e) {
+    console.error(e);
+  }
+});
+
 
 module.exports = router;
