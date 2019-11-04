@@ -13,7 +13,6 @@ const http = require('http');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const pancake = require('anandamide-pancake');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const ip = require('ip');

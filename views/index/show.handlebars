@@ -18,7 +18,7 @@
 </section>
 <form action="/newEntry" method="post">
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
-  <section class="section">
+  <section class="section" style="padding: 1.5rem">
   <div class="container">
     <div class="columns level">
       <div class="column level-item has-text-centered">
@@ -48,11 +48,12 @@
     </div>
     <input type="hidden" name="currentDictionaryID" value="{{dictionary._id}}">
     <div class="field is-grouped is-pulled-right">
-      <div class="control">
-        <button class="button is-link">Submit</button>
+
+      <div class="control" style="margin-bottom: auto; margin-top: auto">
+        total: {{total}}
       </div>
       <div class="control">
-        <button class="button is-text">Clear</button>
+        <button class="button is-link">Submit</button>
       </div>
     </div>
   </div>
@@ -87,16 +88,10 @@
       </div>
       {{#each entry}}
         <a class="panel-block" style="display: block">
-          <div class="level">
-            <div class="level-item">
+          <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between ">
               <span class="has-text-centered">{{word}}</span>
-            </div>
-            <div class="level-item">
               <span class="has-text-centered">{{definition}}</span>
-            </div>
-            <div class="level-item">
               <span class="has-text-centered">{{pronunciation}}</span>
-            </div>
           </div>
         </a>
       {{/each}}

@@ -50,6 +50,7 @@ router.get('/show/:name', csrfProtection, (req, res) => {
           res.render('index/show', {
             dictionary: dictionaryFound,
             entry: allEntries,
+            total: allEntries.length,
             csrfToken: req.csrfToken(), // ============================| This create the unique csrfToken that we add to a hidden input to prevent Cross-Site Request Forgery
             title: 'cabbie', // =========================| title is a string that sets the page title
           });
