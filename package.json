@@ -44,7 +44,7 @@
   "devDependencies": {
     "@getify/eslint-plugin-proper-ternary": "^3.0.1",
     "codacy-coverage": "^3.4.0",
-    "eslint": "^6.6.0",
+    "eslint": "^8.36.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-import-resolver-node": "^0.3.2",
     "eslint-plugin-import": "^2.18.2",
